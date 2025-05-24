@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-import '../../lib/models/game_state.dart';
-import '../../lib/models/object_model.dart';
+import 'package:rockpaperscissor/models/game_state.dart';
+import 'package:rockpaperscissor/models/object_model.dart';
 
 void main() {
   group('GameState Tests', () {

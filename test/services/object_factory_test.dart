@@ -1,8 +1,9 @@
 import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-import '../../lib/models/object_model.dart';
-import '../../lib/services/object_factory.dart';
+import 'package:rockpaperscissor/models/object_model.dart';
+import 'package:rockpaperscissor/services/object_factory.dart';
 
 class MockRandom implements Random {
   final double _fixedValue;

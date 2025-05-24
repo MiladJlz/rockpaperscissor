@@ -1,12 +1,10 @@
-import 'dart:math';
-import 'dart:ui';
 import 'package:flutter/material.dart';
 
-import '../models/object_model.dart';
 import '../models/game_state.dart';
+import '../models/object_model.dart';
 import 'collision_detector.dart';
-import 'object_factory.dart';
 import 'game_rules.dart';
+import 'object_factory.dart';
 
 abstract class GameEngine {
   GameState updateGame(GameState currentState, Size screenSize);

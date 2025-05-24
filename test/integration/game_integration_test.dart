@@ -1,11 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:get/get.dart';
-import '../../lib/controllers/game_controller.dart';
-import '../../lib/models/game_state.dart';
-import '../../lib/models/object_model.dart';
-import '../../lib/services/game_engine.dart';
-import '../../lib/screens/game_screen.dart';
+import 'package:rockpaperscissor/controllers/game_controller.dart';
+import 'package:rockpaperscissor/models/game_state.dart';
+import 'package:rockpaperscissor/screens/game_screen.dart';
 
 void main() {
   group('Game Integration Tests', () {

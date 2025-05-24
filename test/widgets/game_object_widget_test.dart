@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-import '../../lib/models/object_model.dart';
-import '../../lib/widgets/game_object_widget.dart';
+import 'package:rockpaperscissor/models/object_model.dart';
+import 'package:rockpaperscissor/widgets/game_object_widget.dart';
 
 void main() {
   group('GameObjectWidget Tests', () {

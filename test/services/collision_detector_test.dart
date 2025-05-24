@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-import '../../lib/models/object_model.dart';
-import '../../lib/services/collision_detector.dart';
+import 'package:rockpaperscissor/models/object_model.dart';
+import 'package:rockpaperscissor/services/collision_detector.dart';
 
 void main() {
   group('CollisionDetectorImpl Tests', () {

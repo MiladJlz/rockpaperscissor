@@ -1,19 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-import '../../lib/widgets/score_widget.dart';
+import 'package:rockpaperscissor/widgets/score_widget.dart';
 
 void main() {
   group('ScoreWidget Tests', () {
-    testWidgets('should display emoji and score correctly', (WidgetTester tester) async {
+    testWidgets('should display emoji and score correctly', (
+      WidgetTester tester,
+    ) async {
       // Arrange & Act
       await tester.pumpWidget(
         const MaterialApp(
-          home: Scaffold(
-            body: ScoreWidget(
-              emoji: '🪨',
-              score: 5,
-            ),
-          ),
+          home: Scaffold(body: ScoreWidget(emoji: '🪨', score: 5)),
         ),
       );
 
@@ -21,16 +18,13 @@ void main() {
       expect(find.text('🪨 : 5'), findsOneWidget);
     });
 
-    testWidgets('should display zero score correctly', (WidgetTester tester) async {
+    testWidgets('should display zero score correctly', (
+      WidgetTester tester,
+    ) async {
       // Arrange & Act
       await tester.pumpWidget(
         const MaterialApp(
-          home: Scaffold(
-            body: ScoreWidget(
-              emoji: '📄',
-              score: 0,
-            ),
-          ),
+          home: Scaffold(body: ScoreWidget(emoji: '📄', score: 0)),
         ),
       );
 
@@ -38,16 +32,13 @@ void main() {
       expect(find.text('📄 : 0'), findsOneWidget);
     });
 
-    testWidgets('should have correct text styling', (WidgetTester tester) async {
+    testWidgets('should have correct text styling', (
+      WidgetTester tester,
+    ) async {
       // Arrange & Act
       await tester.pumpWidget(
         const MaterialApp(
-          home: Scaffold(
-            body: ScoreWidget(
-              emoji: '✂️',
-              score: 10,
-            ),
-          ),
+          home: Scaffold(body: ScoreWidget(emoji: '✂️', score: 10)),
         ),
       );
 

@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-import '../../lib/models/game_state.dart';
-import '../../lib/models/object_model.dart';
-import '../../lib/services/collision_detector.dart';
-import '../../lib/services/game_engine.dart';
-import '../../lib/services/object_factory.dart';
+import 'package:rockpaperscissor/models/game_state.dart';
+import 'package:rockpaperscissor/models/object_model.dart';
+import 'package:rockpaperscissor/services/collision_detector.dart';
+import 'package:rockpaperscissor/services/game_engine.dart';
+import 'package:rockpaperscissor/services/object_factory.dart';
 
 void main() {
   group('Edge Cases Tests', () {
@@ -31,7 +31,10 @@ void main() {
       );
 
       // Act & Assert
-      expect(() => collisionDetector.detectCollisions([singleObject]), returnsNormally);
+      expect(
+        () => collisionDetector.detectCollisions([singleObject]),
+        returnsNormally,
+      );
       expect(collisionDetector.detectCollisions([singleObject]), isEmpty);
     });
 
@@ -105,7 +108,9 @@ void main() {
         dx: -1,
         dy: -1,
       );
-      final state = GameState.initial().copyWith(objects: [objectWithNegativePosition]);
+      final state = GameState.initial().copyWith(
+        objects: [objectWithNegativePosition],
+      );
 
       // Act
       final updatedState = engine.updateGame(state, const Size(800, 600));
@@ -129,7 +134,9 @@ void main() {
         dx: 1,
         dy: 1,
       );
-      final state = GameState.initial().copyWith(objects: [objectAtMaxBoundary]);
+      final state = GameState.initial().copyWith(
+        objects: [objectAtMaxBoundary],
+      );
 
       // Act
       final updatedState = engine.updateGame(state, screenSize);
@@ -145,9 +152,33 @@ void main() {
       final engine = RockPaperScissorsGameEngine();
       // Three objects at the same position
       final objects = [
-        GameObject(id: 1, type: GameObjectType.rock, color: Colors.red, x: 100, y: 100, dx: 1, dy: 1),
-        GameObject(id: 2, type: GameObjectType.paper, color: Colors.green, x: 100, y: 100, dx: 1, dy: 1),
-        GameObject(id: 3, type: GameObjectType.scissor, color: Colors.blue, x: 100, y: 100, dx: 1, dy: 1),
+        GameObject(
+          id: 1,
+          type: GameObjectType.rock,
+          color: Colors.red,
+          x: 100,
+          y: 100,
+          dx: 1,
+          dy: 1,
+        ),
+        GameObject(
+          id: 2,
+          type: GameObjectType.paper,
+          color: Colors.green,
+          x: 100,
+          y: 100,
+          dx: 1,
+          dy: 1,
+        ),
+        GameObject(
+          id: 3,
+          type: GameObjectType.scissor,
+          color: Colors.blue,
+          x: 100,
+          y: 100,
+          dx: 1,
+          dy: 1,
+        ),
       ];
       final state = GameState.initial().copyWith(
         objects: objects,
@@ -157,9 +188,12 @@ void main() {
       );
 
       // Act & Assert - Should not throw and should handle collisions
-      expect(() => engine.updateGame(state, const Size(800, 600)), returnsNormally);
+      expect(
+        () => engine.updateGame(state, const Size(800, 600)),
+        returnsNormally,
+      );
       final updatedState = engine.updateGame(state, const Size(800, 600));
-      
+
       // At least one collision should have been processed
       expect(updatedState.objects.length, lessThan(3));
     });

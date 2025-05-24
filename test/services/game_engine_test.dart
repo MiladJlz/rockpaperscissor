@@ -1,12 +1,11 @@
-import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-import '../../lib/models/game_state.dart';
-import '../../lib/models/object_model.dart';
-import '../../lib/services/game_engine.dart';
-import '../../lib/services/collision_detector.dart';
-import '../../lib/services/object_factory.dart';
-import '../../lib/services/game_rules.dart';
+import 'package:rockpaperscissor/models/game_state.dart';
+import 'package:rockpaperscissor/models/object_model.dart';
+import 'package:rockpaperscissor/services/collision_detector.dart';
+import 'package:rockpaperscissor/services/game_engine.dart';
+import 'package:rockpaperscissor/services/game_rules.dart';
+import 'package:rockpaperscissor/services/object_factory.dart';
 
 // Mock implementations for testing
 class MockCollisionDetector implements CollisionDetector {
@@ -50,8 +49,24 @@ void main() {
     test('should initialize game with correct initial state', () {
       // Arrange
       final testObjects = [
-        GameObject(id: 1, type: GameObjectType.rock, color: Colors.red, x: 100, y: 100, dx: 1, dy: 1),
-        GameObject(id: 2, type: GameObjectType.paper, color: Colors.green, x: 200, y: 200, dx: -1, dy: -1),
+        GameObject(
+          id: 1,
+          type: GameObjectType.rock,
+          color: Colors.red,
+          x: 100,
+          y: 100,
+          dx: 1,
+          dy: 1,
+        ),
+        GameObject(
+          id: 2,
+          type: GameObjectType.paper,
+          color: Colors.green,
+          x: 200,
+          y: 200,
+          dx: -1,
+          dy: -1,
+        ),
       ];
       final mockFactory = MockObjectFactory(testObjects);
       final engine = RockPaperScissorsGameEngine(
@@ -82,7 +97,9 @@ void main() {
         dx: 5,
         dy: 3,
       );
-      final initialState = GameState.initial().copyWith(objects: [initialObject]);
+      final initialState = GameState.initial().copyWith(
+        objects: [initialObject],
+      );
       final engine = RockPaperScissorsGameEngine(
         collisionDetector: MockCollisionDetector([]),
         objectFactory: MockObjectFactory([]),
@@ -90,7 +107,10 @@ void main() {
       );
 
       // Act
-      final updatedState = engine.updateGame(initialState, const Size(800, 600));
+      final updatedState = engine.updateGame(
+        initialState,
+        const Size(800, 600),
+      );
 
       // Assert
       final updatedObject = updatedState.objects.first;
@@ -109,7 +129,9 @@ void main() {
         dx: -5,
         dy: 3,
       );
-      final initialState = GameState.initial().copyWith(objects: [initialObject]);
+      final initialState = GameState.initial().copyWith(
+        objects: [initialObject],
+      );
       final engine = RockPaperScissorsGameEngine(
         collisionDetector: MockCollisionDetector([]),
         objectFactory: MockObjectFactory([]),
@@ -117,7 +139,10 @@ void main() {
       );
 
       // Act
-      final updatedState = engine.updateGame(initialState, const Size(800, 600));
+      final updatedState = engine.updateGame(
+        initialState,
+        const Size(800, 600),
+      );
 
       // Assert
       final updatedObject = updatedState.objects.first;
@@ -136,7 +161,9 @@ void main() {
         dx: 5,
         dy: 3,
       );
-      final initialState = GameState.initial().copyWith(objects: [initialObject]);
+      final initialState = GameState.initial().copyWith(
+        objects: [initialObject],
+      );
       final engine = RockPaperScissorsGameEngine(
         collisionDetector: MockCollisionDetector([]),
         objectFactory: MockObjectFactory([]),
@@ -144,7 +171,10 @@ void main() {
       );
 
       // Act
-      final updatedState = engine.updateGame(initialState, const Size(800, 600));
+      final updatedState = engine.updateGame(
+        initialState,
+        const Size(800, 600),
+      );
 
       // Assert
       final updatedObject = updatedState.objects.first;
@@ -153,11 +183,27 @@ void main() {
 
     test('should handle same-type collision by swapping velocities', () {
       // Arrange
-      final obj1 = GameObject(id: 1, type: GameObjectType.rock, color: Colors.red, x: 100, y: 100, dx: 5, dy: 3);
-      final obj2 = GameObject(id: 2, type: GameObjectType.rock, color: Colors.red, x: 130, y: 100, dx: -2, dy: -1);
+      final obj1 = GameObject(
+        id: 1,
+        type: GameObjectType.rock,
+        color: Colors.red,
+        x: 100,
+        y: 100,
+        dx: 5,
+        dy: 3,
+      );
+      final obj2 = GameObject(
+        id: 2,
+        type: GameObjectType.rock,
+        color: Colors.red,
+        x: 130,
+        y: 100,
+        dx: -2,
+        dy: -1,
+      );
       final collision = Collision(obj1, obj2);
       final initialState = GameState.initial().copyWith(objects: [obj1, obj2]);
-      
+
       final engine = RockPaperScissorsGameEngine(
         collisionDetector: MockCollisionDetector([collision]),
         objectFactory: MockObjectFactory([]),
@@ -165,12 +211,15 @@ void main() {
       );
 
       // Act
-      final updatedState = engine.updateGame(initialState, const Size(800, 600));
+      final updatedState = engine.updateGame(
+        initialState,
+        const Size(800, 600),
+      );
 
       // Assert
       final updatedObj1 = updatedState.objects.firstWhere((obj) => obj.id == 1);
       final updatedObj2 = updatedState.objects.firstWhere((obj) => obj.id == 2);
-      
+
       expect(updatedObj1.dx, equals(-2)); // Swapped from obj2
       expect(updatedObj1.dy, equals(-1)); // Swapped from obj2
       expect(updatedObj2.dx, equals(5)); // Swapped from obj1
@@ -179,30 +228,51 @@ void main() {
 
     test('should handle different-type collision by removing loser', () {
       // Arrange
-      final rock = GameObject(id: 1, type: GameObjectType.rock, color: Colors.red, x: 100, y: 100, dx: 5, dy: 3);
-      final scissor = GameObject(id: 2, type: GameObjectType.scissor, color: Colors.blue, x: 130, y: 100, dx: -2, dy: -1);
+      final rock = GameObject(
+        id: 1,
+        type: GameObjectType.rock,
+        color: Colors.red,
+        x: 100,
+        y: 100,
+        dx: 5,
+        dy: 3,
+      );
+      final scissor = GameObject(
+        id: 2,
+        type: GameObjectType.scissor,
+        color: Colors.blue,
+        x: 130,
+        y: 100,
+        dx: -2,
+        dy: -1,
+      );
       final collision = Collision(rock, scissor);
       final initialState = GameState.initial().copyWith(
         objects: [rock, scissor],
         rocksCount: 1,
         scissorsCount: 1,
       );
-      
+
       final engine = RockPaperScissorsGameEngine(
         collisionDetector: MockCollisionDetector([collision]),
         objectFactory: MockObjectFactory([]),
-        gameRules: MockGameRules((obj1, obj2) => obj1), // Always return first object as winner
+        gameRules: MockGameRules(
+          (obj1, obj2) => obj1,
+        ), // Always return first object as winner
       );
 
       // Act
-      final updatedState = engine.updateGame(initialState, const Size(800, 600));
+      final updatedState = engine.updateGame(
+        initialState,
+        const Size(800, 600),
+      );
 
       // Assert
       expect(updatedState.objects.length, equals(1)); // Loser removed
       expect(updatedState.objects.first.id, equals(1)); // Rock should remain
       expect(updatedState.rocksWins, equals(1)); // Rock win count increased
       expect(updatedState.scissorsCount, equals(0)); // Scissor count decreased
-      
+
       // Winner direction should be reversed
       expect(updatedState.objects.first.dx, equals(-5));
       expect(updatedState.objects.first.dy, equals(-3));
@@ -210,14 +280,22 @@ void main() {
 
     test('should detect rock wins when only rocks remain', () {
       // Arrange
-      final rock = GameObject(id: 1, type: GameObjectType.rock, color: Colors.red, x: 100, y: 100, dx: 5, dy: 3);
+      final rock = GameObject(
+        id: 1,
+        type: GameObjectType.rock,
+        color: Colors.red,
+        x: 100,
+        y: 100,
+        dx: 5,
+        dy: 3,
+      );
       final initialState = GameState.initial().copyWith(
         objects: [rock],
         rocksCount: 1,
         papersCount: 0,
         scissorsCount: 0,
       );
-      
+
       final engine = RockPaperScissorsGameEngine(
         collisionDetector: MockCollisionDetector([]),
         objectFactory: MockObjectFactory([]),
@@ -225,7 +303,10 @@ void main() {
       );
 
       // Act
-      final updatedState = engine.updateGame(initialState, const Size(800, 600));
+      final updatedState = engine.updateGame(
+        initialState,
+        const Size(800, 600),
+      );
 
       // Assert
       expect(updatedState.status, equals(GameStatus.rockWins));
@@ -234,14 +315,22 @@ void main() {
 
     test('should detect paper wins when only papers remain', () {
       // Arrange
-      final paper = GameObject(id: 1, type: GameObjectType.paper, color: Colors.green, x: 100, y: 100, dx: 5, dy: 3);
+      final paper = GameObject(
+        id: 1,
+        type: GameObjectType.paper,
+        color: Colors.green,
+        x: 100,
+        y: 100,
+        dx: 5,
+        dy: 3,
+      );
       final initialState = GameState.initial().copyWith(
         objects: [paper],
         rocksCount: 0,
         papersCount: 1,
         scissorsCount: 0,
       );
-      
+
       final engine = RockPaperScissorsGameEngine(
         collisionDetector: MockCollisionDetector([]),
         objectFactory: MockObjectFactory([]),
@@ -249,7 +338,10 @@ void main() {
       );
 
       // Act
-      final updatedState = engine.updateGame(initialState, const Size(800, 600));
+      final updatedState = engine.updateGame(
+        initialState,
+        const Size(800, 600),
+      );
 
       // Assert
       expect(updatedState.status, equals(GameStatus.paperWins));
@@ -258,14 +350,22 @@ void main() {
 
     test('should detect scissor wins when only scissors remain', () {
       // Arrange
-      final scissor = GameObject(id: 1, type: GameObjectType.scissor, color: Colors.blue, x: 100, y: 100, dx: 5, dy: 3);
+      final scissor = GameObject(
+        id: 1,
+        type: GameObjectType.scissor,
+        color: Colors.blue,
+        x: 100,
+        y: 100,
+        dx: 5,
+        dy: 3,
+      );
       final initialState = GameState.initial().copyWith(
         objects: [scissor],
         rocksCount: 0,
         papersCount: 0,
         scissorsCount: 1,
       );
-      
+
       final engine = RockPaperScissorsGameEngine(
         collisionDetector: MockCollisionDetector([]),
         objectFactory: MockObjectFactory([]),
@@ -273,7 +373,10 @@ void main() {
       );
 
       // Act
-      final updatedState = engine.updateGame(initialState, const Size(800, 600));
+      final updatedState = engine.updateGame(
+        initialState,
+        const Size(800, 600),
+      );
 
       // Assert
       expect(updatedState.status, equals(GameStatus.scissorWins));
@@ -283,7 +386,15 @@ void main() {
     test('restartGame should return fresh initial state', () {
       // Arrange
       final testObjects = [
-        GameObject(id: 1, type: GameObjectType.rock, color: Colors.red, x: 100, y: 100, dx: 1, dy: 1),
+        GameObject(
+          id: 1,
+          type: GameObjectType.rock,
+          color: Colors.red,
+          x: 100,
+          y: 100,
+          dx: 1,
+          dy: 1,
+        ),
       ];
       final mockFactory = MockObjectFactory(testObjects);
       final engine = RockPaperScissorsGameEngine(

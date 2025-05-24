@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-import '../../lib/models/object_model.dart';
+import 'package:rockpaperscissor/models/object_model.dart';
 
 void main() {
   group('GameObject Tests', () {
@@ -55,8 +55,6 @@ void main() {
       expect(updatedObject.x, equals(defaultObject.x));
       expect(updatedObject.dy, equals(defaultObject.dy));
     });
-
-   
 
     test('should handle position updates correctly', () {
       defaultObject.x = 150.0;
